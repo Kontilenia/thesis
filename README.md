@@ -1,2 +1,2 @@
 # thesis
-Repository for thesis
+Repository for master's thesis
