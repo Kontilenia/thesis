@@ -58,7 +58,12 @@ def pattern_cleaning(
         regex=True
         )
     df['interview_answer'] = df['interview_answer'].str.replace(
-        r'\n',
+        r'["\n\r]',
+        '',
+        regex=True
+        )
+    df['interview_question'] = df['interview_question'].str.replace(
+        r'["\n\r]',
         '',
         regex=True
         )
@@ -208,17 +213,15 @@ def save_dataset(df: pd.DataFrame, exception_list: List[int], storing_path: str)
     # Save to path
     df.to_csv(storing_path, index=False)
 
-
-
 def main():
     # Load train dataset
     ds = load_dataset("ailsntua/QEvasion")
 
     # Convert to pandas and keep only useful columns
-    # df_train = ds["train"].to_pandas()[["question","interview_question",
-    #                                     "interview_answer", "label","url"]]
+    df_train = ds["train"].to_pandas()[["question","interview_question",
+                                        "interview_answer", "label","url"]]
 
-    df_train = ds["train"].to_pandas()
+    # df_train = ds["train"].to_pandas()
 
     # Handpicked expeption to unwanted patterns
     train_exception_list = [142,493,699,809,1052,1053,1446,
@@ -226,23 +229,34 @@ def main():
 
     save_dataset(
         df_train, train_exception_list, 
-        "preprocessed_data/full_train_set.csv"
+        "preprocessed_data/train_set.csv"
     )
 
-    df_test = pd.read_csv('data/test_set_with_label.csv')
+    # df_test = pd.read_csv('data/test_set.csv')
 
-    # test column mapping
-    column_mapping = {
-    'Question': 'question',
-    'Interview Answer': 'interview_answer'
-    }
+    # # test column mapping
+    # column_mapping = {
+    # 'Question': 'question',
+    # 'Interview Answer': 'interview_answer',
+    # 'link': 'url',
+    # "Interview Question": "interview_question",
+    # "Label": "label"
+    # }
 
-    df_test = df_test.rename(columns=column_mapping)
+    # df_test = df_test.rename(columns=column_mapping)
 
-    # Handpicked expeption to unwanted patterns
-    test_exception_list = [160, 176, 207, 309]
+    # # Keep only useful columns
+    # df_test = df_test[["question","interview_question",
+    #                                     "interview_answer", 
+    #                                     "label","url",
+    #                                     "Annotator1",
+    #                                     "Annotator2",
+    #                                     "Annotator3"]]
 
-    save_dataset(df_test, test_exception_list, "preprocessed_data/full_test_set.csv")
+    # # Handpicked expeption to unwanted patterns
+    # test_exception_list = [153, 169, 200, 300]
+
+    # save_dataset(df_test, test_exception_list, "preprocessed_data/test_set.csv")
 
 if __name__ == "__main__":
     main()
