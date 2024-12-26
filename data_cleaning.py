@@ -232,31 +232,31 @@ def main():
         "preprocessed_data/train_set.csv"
     )
 
-    # df_test = pd.read_csv('data/test_set.csv')
+    df_test = pd.read_csv('data/test_set.csv')
 
-    # # test column mapping
-    # column_mapping = {
-    # 'Question': 'question',
-    # 'Interview Answer': 'interview_answer',
-    # 'link': 'url',
-    # "Interview Question": "interview_question",
-    # "Label": "label"
-    # }
+    # test column mapping
+    column_mapping = {
+    'Question': 'question',
+    'Interview Answer': 'interview_answer',
+    'link': 'url',
+    "Interview Question": "interview_question",
+    "Label": "label"
+    }
 
-    # df_test = df_test.rename(columns=column_mapping)
+    df_test = df_test.rename(columns=column_mapping)
 
-    # # Keep only useful columns
-    # df_test = df_test[["question","interview_question",
-    #                                     "interview_answer", 
-    #                                     "label","url",
-    #                                     "Annotator1",
-    #                                     "Annotator2",
-    #                                     "Annotator3"]]
+    # Keep only useful columns
+    df_test = df_test[["question","interview_question",
+                                        "interview_answer", 
+                                        "label","url",
+                                        "Annotator1",
+                                        "Annotator2",
+                                        "Annotator3"]]
 
-    # # Handpicked expeption to unwanted patterns
-    # test_exception_list = [153, 169, 200, 300]
+    # Handpicked expeption to unwanted patterns
+    test_exception_list = [153, 169, 200, 300]
 
-    # save_dataset(df_test, test_exception_list, "preprocessed_data/test_set.csv")
+    save_dataset(df_test, test_exception_list, "preprocessed_data/test_set.csv")
 
 if __name__ == "__main__":
     main()
