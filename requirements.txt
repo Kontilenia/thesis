@@ -1,0 +1,4 @@
+datasets
+pandas
+requests
+bs4

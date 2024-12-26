@@ -73,7 +73,7 @@ def pattern_cleaning(
         )
 
     # 4) Remove description from questions
-    df.loc[~df.index.isin(exceptions), 'question'] = df_train.loc[
+    df.loc[~df.index.isin(exceptions), 'question'] = df.loc[
         ~df.index.isin(exceptions), 'question'].apply(
         lambda x: re.sub(r'^[^:]+: ', '', x))
     return df
@@ -190,18 +190,20 @@ def extra_labels(df: pd.DataFrame) -> pd.DataFrame:
   Returns:
   df – Labeled dataframe
   """
-  df_train["inaudible"] = df_train['interview_answer'].str.contains('inaudible', case=False)
-  df_train["multiple_questions"] = df_train['question'].str.count('\?') > 1
-  df_train["affirmative_questions"] = ~df_train['question'].str.contains('\?')
-  return df_train
+  df["inaudible"] = df['interview_answer'].str.contains('inaudible', case=False)
+  df["multiple_questions"] = df['question'].str.count('\?') > 1
+  df["affirmative_questions"] = ~df['question'].str.contains('\?')
+  return df
 
 def main():
   # Load train dataset
   ds = load_dataset("ailsntua/QEvasion")
 
   # Convert to pandas and keep only useful columns
-  df_train = ds["train"].to_pandas()[["question","interview_question",
-                                    "interview_answer", "label","url"]]
+#   df_train = ds["train"].to_pandas()[["question","interview_question",
+#                                     "interview_answer", "label","url"]]
+  
+  df_train = ds["train"].to_pandas()
 
   # Remove unwanted patterns
   exception_list = [142,493,699,809,1052,1053,1446,
@@ -214,7 +216,8 @@ def main():
   # Add 2 more labels for multiple questions and inadible speech
   df_train = extra_labels(df_train)
 
-  df_train.to_csv('output.csv', index=False)	
+  # df_train.to_csv('preprocessed_data/train_set.csv', index=False)	
+  df_train.to_csv('preprocessed_data/full_train_set.csv', index=False)
 
 if __name__ == "__main__":
   main()
