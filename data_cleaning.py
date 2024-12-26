@@ -181,43 +181,68 @@ def remove_unrelated_text(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 def extra_labels(df: pd.DataFrame) -> pd.DataFrame:
-  """
-  Add inadible and multiple question labels to the dataset
+    """
+    Add inadible and multiple question labels to the dataset
 
-  Arguments:
-  df – Dataframe
+    Arguments:
+    df – Dataframe
 
-  Returns:
-  df – Labeled dataframe
-  """
-  df["inaudible"] = df['interview_answer'].str.contains('inaudible', case=False)
-  df["multiple_questions"] = df['question'].str.count('\?') > 1
-  df["affirmative_questions"] = ~df['question'].str.contains('\?')
-  return df
+    Returns:
+    df – Labeled dataframe
+    """
+    df["inaudible"] = df['interview_answer'].str.contains('inaudible', case=False)
+    df["multiple_questions"] = df['question'].str.count('\?') > 1
+    df["affirmative_questions"] = ~df['question'].str.contains('\?')
+    return df
+
+def save_dataset(df: pd.DataFrame, exception_list: List[int], storing_path: str) -> None:
+    # Remove unwanted patterns
+    df = pattern_cleaning(df, exception_list)
+
+    # Extract noise from the end of interview answer
+    df = remove_unrelated_text(df)
+
+    # Add 2 more labels for multiple questions and inadible speech
+    df = extra_labels(df)
+
+    # Save to path
+    df.to_csv(storing_path, index=False)
+
+
 
 def main():
-  # Load train dataset
-  ds = load_dataset("ailsntua/QEvasion")
+    # Load train dataset
+    ds = load_dataset("ailsntua/QEvasion")
 
-  # Convert to pandas and keep only useful columns
-#   df_train = ds["train"].to_pandas()[["question","interview_question",
-#                                     "interview_answer", "label","url"]]
-  
-  df_train = ds["train"].to_pandas()
+    # Convert to pandas and keep only useful columns
+    # df_train = ds["train"].to_pandas()[["question","interview_question",
+    #                                     "interview_answer", "label","url"]]
 
-  # Remove unwanted patterns
-  exception_list = [142,493,699,809,1052,1053,1446,
+    df_train = ds["train"].to_pandas()
+
+    # Handpicked expeption to unwanted patterns
+    train_exception_list = [142,493,699,809,1052,1053,1446,
                     2417,2631,2821,3181,3390]
-  df_train = pattern_cleaning(df_train, exception_list)
 
-  # Extract noise from the end of interview answer
-  df_train = remove_unrelated_text(df_train)
+    save_dataset(
+        df_train, train_exception_list, 
+        "preprocessed_data/full_train_set.csv"
+    )
 
-  # Add 2 more labels for multiple questions and inadible speech
-  df_train = extra_labels(df_train)
+    df_test = pd.read_csv('data/test_set_with_label.csv')
 
-  # df_train.to_csv('preprocessed_data/train_set.csv', index=False)	
-  df_train.to_csv('preprocessed_data/full_train_set.csv', index=False)
+    # test column mapping
+    column_mapping = {
+    'Question': 'question',
+    'Interview Answer': 'interview_answer'
+    }
+
+    df_test = df_test.rename(columns=column_mapping)
+
+    # Handpicked expeption to unwanted patterns
+    test_exception_list = [160, 176, 207, 309]
+
+    save_dataset(df_test, test_exception_list, "preprocessed_data/full_test_set.csv")
 
 if __name__ == "__main__":
-  main()
+    main()
