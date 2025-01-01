@@ -1,7 +1,6 @@
 # thesis
--------------
-Repository for my master's thesis
--------------
+
+This repository is used for storing the implementation part of my master's thesis.
 
 Master thesis topic: Prediction of clarity on political speech using LLMs.
 
