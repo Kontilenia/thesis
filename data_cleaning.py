@@ -4,6 +4,7 @@ import re
 from typing import List
 import requests
 from bs4 import BeautifulSoup
+from collections import Counter
 
 def pattern_cleaning(
     df: pd.DataFrame,
@@ -203,7 +204,7 @@ def extra_labels(df: pd.DataFrame) -> pd.DataFrame:
     df["affirmative_questions"] = ~df['question'].str.contains('\?')
     return df
 
-def alter_class_names(df: pd.DataFrame) -> pd.DataFrame:
+def alter_label_names(df: pd.DataFrame) -> pd.DataFrame:
     """
     Alter class names to match with the paper ones
 
@@ -218,8 +219,7 @@ def alter_class_names(df: pd.DataFrame) -> pd.DataFrame:
     # Remove the taxonomy numbers from labels
     df["annotator1"] = df["annotator1"].str.slice(4)
     df["annotator2"] = df["annotator2"].str.slice(4)
-    df["annotator3"] = df["annotator3"].str.slice(4)
-    
+    df["annotator3"] = df["annotator3"].str.slice(4)   
     return df
 
 def create_labels_train_set(df: pd.DataFrame) -> pd.DataFrame:
@@ -251,6 +251,52 @@ def create_labels_train_set(df: pd.DataFrame) -> pd.DataFrame:
     df.rename(columns={"label": "evasion_label"}, inplace=True)
     return df
 
+def label_selection(
+        annotation1: str, annotation2: str, 
+        annotation3: str, expert: str
+    ) -> str:
+    """
+    Select the most common label from the annotations unless it is different from the expert label
+    
+    Arguments:
+        annotation1: Annotation from annotator1
+        annotation2: Annotation from annotator2
+        annotation3: Annotation from annotator3
+        expert: The expert's label    
+
+    Returns:
+        label: The selected label
+    """
+
+    evasion_mapping ={
+        'Direct Reply': ['Explicit'],
+        'Indirect': 
+        ['Implicit', 'Dodging', 'Deflection', 'Partial/half-answer', 
+         'General', 'Contradictory', 'Diffusion'],
+        'Direct Non-Reply': 
+        ['Declining to answer', 'Claims ignorance', 'Clarification']
+    }
+
+    label_list = [annotation1, annotation2, annotation3]
+
+    # Get most common label
+    popular_label, count = Counter(label_list).most_common(1)[0]
+
+    # If there is no common label
+    if count < 2:
+
+        # Get the ones that matches the expert's label on the evasion scale
+        new_label_list = [l for l in label_list if l in evasion_mapping[expert]]
+
+        # If there is only one label this is the new label
+        if len(new_label_list)==1:
+            return new_label_list[0]
+        
+        # If there are more than one labels that matches the expert's label
+        # return NA
+        return pd.NA
+    return popular_label
+
 def create_labels_test_set(df: pd.DataFrame) -> pd.DataFrame:  
     """
     Create labels for the dataset
@@ -269,6 +315,17 @@ def create_labels_test_set(df: pd.DataFrame) -> pd.DataFrame:
     }
 
     df["evasion_label"] = df["label"].map(evasion_mapping)
+
+    # The actual row label will be the the string with more appriences in the annotator1, annotator2 and annotator3 column
+    # if there is a tie, the label will be the value of the label column
+    df["clarity_label"] = df.apply(lambda x: label_selection(x["annotator1"], x["annotator2"], x["annotator3"], x["evasion_label"]), axis=1)
+
+    # # Check for columns with no common labels
+    # NA_df = df[df["clarity_label"].isna()]
+    # print(f'Columns with no common labels: {len(NA_df)}')
+    # print(f'Columns of df: {len(df)}')
+    # print(NA_df)
+
     return df
 
 def clean_dataset(
@@ -302,39 +359,44 @@ def clean_dataset(
     # Add 2 more labels for multiple questions and inadible speech
     df = extra_labels(df)
 
-    # Do extra cleaning for test set
+    # Do extra cleaning for train and test set
     if test_set:
-        df = alter_class_names(df)
+        df = alter_label_names(df)
+        df = create_labels_test_set(df)
+    else:
+        df = create_labels_train_set(df)
 
     # Save full dataset to path
     df.to_csv(full_storing_path, index=False)
 
-    # Get the columns necessary for training
+    # Get the columns necessary for training/testing
+    # and add the evasion and clarity labels
+    column_names.extend(["evasion_label", "clarity_label"])
     df = df[column_names]
 
     # Save core dataset to path
     df.to_csv(storing_path, index=False)
 
 def main():
-    # # Load train dataset
-    # ds = load_dataset("ailsntua/QEvasion")
+    # Load train dataset
+    ds = load_dataset("ailsntua/QEvasion")
 
-    # # Convert to pandas and keep only useful columns
-    # df_train = ds["train"].to_pandas()
+    # Convert to pandas and keep only useful columns
+    df_train = ds["train"].to_pandas()
 
-    # column_names = ["question","interview_question",
-    #                  "interview_answer", "label","url"]
+    column_names = ["question","interview_question",
+                     "interview_answer"]
 
-    # # Handpicked expeption to unwanted patterns
-    # train_exception_list = [142,493,699,809,1052,1053,1446,
-    #                 2417,2631,2821,3181,3390]
+    # Handpicked expeption to unwanted patterns
+    train_exception_list = [142,493,699,809,1052,1053,1446,
+                    2417,2631,2821,3181,3390]
 
-    # clean_dataset(
-    #     df_train, train_exception_list, 
-    #     "preprocessed_data/train_set.csv",
-    #     "preprocessed_data/full_train_set.csv",
-    #     column_names
-    # )
+    clean_dataset(
+        df_train, train_exception_list, 
+        "preprocessed_data/train_set.csv",
+        "preprocessed_data/full_train_set.csv",
+        column_names
+    )
 
     df_test = pd.read_csv('data/test_set.csv')
 
@@ -352,8 +414,7 @@ def main():
 
     df_test = df_test.rename(columns=column_mapping)
 
-    column_names = ["question","interview_question","interview_answer", 
-                    "label", "url", "annotator1", "annotator2", "annotator3"]
+    column_names = ["question","interview_question","interview_answer"]
 
     # Handpicked expeption to unwanted patterns
     test_exception_list = [153, 169, 200, 300]
