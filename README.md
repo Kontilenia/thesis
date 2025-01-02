@@ -1,8 +1,6 @@
-# thesis
+# Master thesis: Prediction of clarity on political speech using LLMs
 
 This repository is used for storing the implementation part of my master's thesis.
-
-Master thesis topic: **Prediction of clarity on political speech using LLMs**
 
 The goal of the thesis is to utilize the dataset from *"I Never Said That: A dataset, taxonomy and baselines on response clarity classification"* paper and LLMs to improve the metrics of the paper and explore different DL techniques.
 
