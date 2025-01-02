@@ -1,4 +1,4 @@
-# Master thesis: Prediction of clarity on political speech using LLMs
+# Master's thesis: Prediction of clarity on political speech using LLMs
 
 This repository is used for storing the implementation part of my master's thesis.
 
