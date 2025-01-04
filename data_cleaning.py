@@ -379,7 +379,7 @@ def clean_dataset(
 
 def main():
     # Load train dataset
-    ds = load_dataset("ailsntua/QEvasion")
+    ds = load_dataset("ailsntua/QEvasion", revision="53ad13f307a1fd92859d23c8732b81ee490d3938")
 
     # Convert to pandas and keep only useful columns
     df_train = ds["train"].to_pandas()
