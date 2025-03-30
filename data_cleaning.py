@@ -308,20 +308,20 @@ def create_labels_test_set(df: pd.DataFrame) -> pd.DataFrame:
         df: Dataframe with labels
     """
 
-    evasion_mapping = {
+    clarity_mapping = {
     'Direct Reply': 'Direct Reply',
     'Indirect': 'Indirect',
     'Direct Non-Reply': 'Direct Non-Reply'
     }
 
-    df["evasion_label"] = df["label"].map(evasion_mapping)
+    df["clarity_label"] = df["label"].map(clarity_mapping)
 
     # The actual row label will be the the string with more appriences in the annotator1, annotator2 and annotator3 column
     # if there is a tie, the label will be the value of the label column
-    df["clarity_label"] = df.apply(lambda x: label_selection(x["annotator1"], x["annotator2"], x["annotator3"], x["evasion_label"]), axis=1)
+    df["evasion_label"] = df.apply(lambda x: label_selection(x["annotator1"], x["annotator2"], x["annotator3"], x["clarity_label"]), axis=1)
 
     # # Check for columns with no common labels
-    # NA_df = df[df["clarity_label"].isna()]
+    # NA_df = df[df["evasion_label"].isna()]
     # print(f'Columns with no common labels: {len(NA_df)}')
     # print(f'Columns of df: {len(df)}')
     # print(NA_df)
