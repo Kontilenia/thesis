@@ -160,9 +160,11 @@ class InformationExtractionAgent:
         wiki_info = " ".join(state["wiki_search"]['introduction'])
         messages = [{
             "role": "user",
-            "content": f"""Is the following Wikipedia info relevant to the entity '{state['name']}' in the context of this text? Respond only with true or false.
-            TEXT: {sentence}
-            WIKI INFO: {wiki_info}"""
+            "content":
+                f"""Is the following Wikipedia info relevant to identifying the entity '{state['name']}' in the context of this text? 
+                Respond only with true or false. Say false if the wiki info is too vague, general, or lacks specific details that directly confirm the identity of the entity.
+                TEXT: {sentence}
+                WIKI INFO: {wiki_info}"""
         }]
         result = self.call_claude(messages).strip().lower()
         state["name_mapping"] = result == "true"
