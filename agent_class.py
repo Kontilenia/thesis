@@ -33,6 +33,11 @@ class InformationExtractionAgent:
         logging.getLogger("httpx").setLevel(logging.WARNING)
         logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
         self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.WARNING)  # Only warnings and errors will be logged
+        file_handler = logging.FileHandler("agent.log")
+        file_handler.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(message)s"))
+        self.logger.addHandler(file_handler)
+        self.logger.propagate = False
 
         # Build graph
         self.compiled_graph = self._build_graph()
@@ -225,6 +230,7 @@ class InformationExtractionAgent:
         return myGraph.compile()
 
     def run(self, name: str, text: str):
+        self.logger.info(f"New run:")
         result = self.compiled_graph.invoke({"name": name, "text": text})
         return result
     
