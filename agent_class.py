@@ -171,6 +171,9 @@ class InformationExtractionAgent:
         else:
             self.logger.info("Name didn't match with retrieved info")
         return state
+    
+    def route_after_mapping(self, state: 'InformationExtractionAgent.AgentState') -> str:
+        return "mapping_true" if state["name_mapping"] else "mapping_false"
 
     def tailor_summary_node(self, state: 'InformationExtractionAgent.AgentState') -> 'InformationExtractionAgent.AgentState':
         sentence = state["text"]
@@ -219,7 +222,17 @@ class InformationExtractionAgent:
         )
         
         myGraph.add_edge("get_wikipedia_intro_node", "check_info_relevancy_node")
-        myGraph.add_edge("check_info_relevancy_node", "tailor_summary_node")
+
+
+        myGraph.add_conditional_edges(
+            "check_info_relevancy_node",
+            self.route_after_mapping,
+            {
+                "mapping_true": "tailor_summary_node",
+                "mapping_false": END
+            }
+        )
+
         myGraph.add_edge("tailor_summary_node", END)
         
         return myGraph.compile()
