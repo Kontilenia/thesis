@@ -298,6 +298,37 @@ def create_test_prompted_text(dataset: pd.DataFrame,
     return texts
 
 
+def create_test_prompted_text_name_summaries(dataset: pd.DataFrame,
+                              label_name: str) -> List[str]:
+    """
+    Creates prompted text for classification from the test dataset.
+
+    Args:
+        dataset (pd.DataFrame): The dataset containing interview questions
+        and answers.
+        label_name (str): The name of the label column for classification.
+
+    Returns:
+        List[str]: A list of formatted prompt texts for each interview response.
+    """
+
+    texts = []
+    classes_names = ', '.join(list(dataset[label_name].unique()))
+
+    for _, row in dataset.iterrows():
+        texts.append(
+            f"You will be given a part of an interview."
+            f"Classify the response to the selected question"
+            f"into one of the following categories: {classes_names}"
+            f". \n\n ### Part of the interview ### \nIntervier:"
+            f" {row['interview_question']} \nResponse:"
+            f" {row['interview_answer']} \n\n### Selected Question: ###\n"
+            f" {row['names_information']} \n\n### Information about mentioned people: ###\n"
+            f"{row['question']} \n\nLabel:"
+        )
+    return texts
+
+
 def create_inference_prompted_text(dataset: pd.DataFrame,
                                    label_name: str) -> List[str]:
     """
@@ -514,6 +545,7 @@ def evaluate(base_model_name: str,
              train_label_name: str,
              test_label_name: str,
              test_set_path: str = 'preprocessed_data/test_set.csv',
+             added_name_summary: bool = False,
              model: nn.Module = None,
              tokenizer: PreTrainedTokenizer = None,
              run=None) -> None:
@@ -557,19 +589,28 @@ def evaluate(base_model_name: str,
     tokenizer.pad_token = tokenizer.eos_token
     # tokenizer.add_special_tokens({'pad_token': '[PAD]'})
 
-    # Get test set data
-    test_df = pd.read_csv(test_set_path)[[
+    list_of_columns = [
         'question',
         'interview_question',
         'interview_answer',
         test_label_name,
         train_label_name
-    ]]
+    ]
 
+    if added_name_summary:
+        list_of_columns.extend(['names_information'])
+
+    # Get test set data
+    test_df = pd.read_csv(test_set_path)[list_of_columns]
+    
     # creating bool series False for NaN values
     test_df = test_df[test_df["evasion_label"].notnull()]
 
-    test_texts = create_test_prompted_text(test_df, train_label_name)
+    if added_name_summary:
+        test_texts = create_test_prompted_text_name_summaries(test_df, train_label_name)     
+    else: 
+        test_texts = create_test_prompted_text(test_df, train_label_name)
+
     dataset = pd.DataFrame(test_texts, columns=['text'])
 
     # NEW

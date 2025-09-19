@@ -1,264 +1,264 @@
 ,combined_entities
 0,[]
 1,[]
-2,"['Roh', 'Condi', 'Hu Jintao', 'Vladimir Putin', 'Prime Minister Koizumi']"
-3,"['Condi', 'Peter', 'Peter Wallsten', 'Olmert', 'Hizballah', 'Siniora', 'Kofi Annan']"
+2,"['Koizumi', 'Roh', 'Condi', 'Vladimir Putin', 'Hu Jintao']"
+3,"['Peter Wallsten', 'Siniora', 'Condi', 'Olmert', 'Hizballah', 'Peter', 'Kofi Annan']"
 4,['General Casey']
-5,"['Mark', 'Ken', 'Hutcheson']"
-6,"['Jim', 'Senator Warner', 'General Casey', 'Baker']"
-7,"['Condi', 'Prime Minister Siniora', 'Abbas', 'Nabih Berri', 'Siniora', 'Secretary Rice', 'Speaker Berri', 'Suzanne']"
-8,"['Condi', 'Abbas', 'Secretary Rice', 'Prime Minister Olmert']"
+5,"['Hutcheson', 'Mark', 'Ken']"
+6,"['Baker', 'General Casey', 'Senator Warner', 'Jim']"
+7,"['Speaker Berri', 'Siniora', 'Condi', 'Abbas', 'Nabih Berri', 'Suzanne', 'Secretary Rice']"
+8,"['Secretary Rice', 'Abbas', 'Olmert', 'Condi']"
 9,[]
-10,"['Steve Holland', 'Vladimir', 'Vladimir Putin']"
+10,"['Vladimir', 'Steve Holland', 'Vladimir Putin']"
 11,[]
-12,"['Abraham Lincoln', 'Hutch', 'Herman', 'Laura', 'Mike']"
-13,"['George', 'Vladimir', 'Dmitry Medvedev']"
-14,"['Steve', 'Lee Hamilton', 'man Wolf', 'James Baker', 'Senator Warner', 'General Casey', 'Jimmy Baker', 'Martha Raddatz', 'Baker']"
-15,"['David Gregory', 'Prime Minister Blair']"
-16,"['Mark', 'John McKinnon']"
+12,"['Abraham Lincoln', 'Herman', 'Mike', 'Hutch', 'Laura']"
+13,"['Vladimir', 'George', 'Dmitry Medvedev']"
+14,"['James Baker', 'Jimmy Baker', 'General Casey', 'Steve', 'Lee Hamilton', 'man Wolf', 'Martha Raddatz', 'Baker', 'Senator Warner']"
+15,"['Blair', 'David Gregory']"
+16,"['John McKinnon', 'Mark']"
 17,"['Joe Lieberman', 'Senator Joe Lieberman']"
-18,"['Peter', 'Peter Baker', 'Sheryl']"
+18,"['Peter', 'Sheryl', 'Peter Baker']"
 19,[]
-20,"['Anne Gearan', 'George Bush', 'Bush', 'Olmert']"
+20,"['Bush', 'George Bush', 'Olmert', 'Anne Gearan']"
 21,['Asad']
 22,[]
-23,"['Sarkozy', 'Mark Riley', 'Obama', 'Chancellor Merkel', 'Prime Minister Gillard']"
+23,"['Mark Riley', 'Gillard', 'Sarkozy', 'Obama', 'Chancellor Merkel']"
 24,[]
 25,['Harper']
-26,"['Tony', 'Siniora']"
-27,"['Sarkozy', 'Mark Riley', 'Obama', 'Chancellor Merkel', 'Prime Minister Gillard']"
-28,"['David Gregory', 'Martha', 'Saddam Hussein', 'Dave', 'Zarqawi']"
-29,"['Solana', 'Javier Solana', 'Javier', 'Larijani', 'Putin']"
+26,"['Siniora', 'Tony']"
+27,"['Mark Riley', 'Gillard', 'Sarkozy', 'Obama', 'Chancellor Merkel']"
+28,"['Martha', 'David Gregory', 'Saddam Hussein', 'Zarqawi', 'Dave']"
+29,"['Javier', 'Javier Solana', 'Larijani', 'Putin', 'Solana']"
 30,['Lee']
 31,[]
-32,"['McCain', 'Senator Obama', 'Obama', 'Senator McCain', 'Jim']"
-33,"['Joint Chiefs', 'Grand Ayatollah Ali al-Sistani', 'Sistani', 'Kelly O Donnell', 'Baker', 'Kelly']"
-34,"['Jim', 'Sheryl Gay Stolberg']"
+32,"['Jim', 'Senator Obama', 'McCain', 'Obama', 'Senator McCain']"
+33,"['Joint Chiefs', 'Kelly O Donnell', 'Grand Ayatollah Ali al-Sistani', 'Kelly', 'Baker', 'Sistani']"
+34,"['Sheryl Gay Stolberg', 'Jim']"
 35,['Jackson']
 36,[]
-37,"['Prime Minister Olmert', 'Secretary Rice', 'Abbas']"
-38,"['Clinton', 'Senator Jon Kyl', 'Bush', 'Secretaries of Defense', 'Reagan', 'Bush II', 'Karen DeYoung', 'Ronald Reagan', 'Bush I']"
+37,"['Secretary Rice', 'Olmert', 'Abbas']"
+38,"['Secretaries of Defense', 'Senator Jon Kyl', 'Bush', 'Karen DeYoung', 'Bush II', 'Reagan', 'Bush I', 'Clinton', 'Ronald Reagan']"
 39,['John']
-40,"['David Brooks', 'Saddam', 'Saddam Hussein', 'Martha Raddatz', 'Secretary Gates', 'Robert Gates']"
-41,"['Anne Gearan', 'George Bush', 'Bush', 'Olmert']"
-42,"['Tony', 'Siniora']"
-43,"['Fletch', 'Michael', 'Ben Bernanke', 'Roger']"
+40,"['David Brooks', 'Robert Gates', 'Saddam Hussein', 'Martha Raddatz', 'Secretary Gates', 'Saddam']"
+41,"['Bush', 'George Bush', 'Olmert', 'Anne Gearan']"
+42,"['Siniora', 'Tony']"
+43,"['Roger', 'Fletch', 'Michael', 'Ben Bernanke']"
 44,[]
-45,"['Lee Myung-bak', 'Obama']"
+45,"['Obama', 'Lee Myung-bak']"
 46,[]
 47,[]
-48,"['Chertoff', 'Harper', 'Jim Axelrod', 'Stephen']"
+48,"['Chertoff', 'Jim Axelrod', 'Harper', 'Stephen']"
 49,[]
-50,"['Matt Spetalnick', 'Prime Minister']"
+50,['Matt Spetalnick']
 51,['Andy']
-52,"['Alberto R. Gonzales', 'I. Lewis Scooter Libby', 'Lewis Scooter Libby']"
+52,"['I. Lewis Scooter Libby', 'Alberto R. Gonzales', 'Lewis Scooter Libby']"
 53,[]
 54,['Fidel Castro']
-55,"['Secretary Chertoff', 'Bob']"
+55,"['Bob', 'Secretary Chertoff']"
 56,[]
 57,['Fidel Castro']
 58,['Ben Bernanke']
 59,['Jackson']
 60,[]
-61,"['Hu', 'Obama']"
-62,"['Usama bin Laden', 'Karzai', 'John Negroponte', 'Musharraf']"
+61,"['Obama', 'Hu']"
+62,"['John Negroponte', 'Musharraf', 'Karzai', 'Usama bin Laden']"
 63,"['House Speaker Hastert', 'Hastert', 'Mark Foley']"
 64,"['Tillman', 'Pat Tillman', 'Corporal Pat Tillman']"
-65,"['Chertoff', 'Harper', 'Jim Axelrod', 'Stephen']"
+65,"['Chertoff', 'Jim Axelrod', 'Harper', 'Stephen']"
 66,[]
 67,['Usama bin Laden']
 68,[]
-69,"['Abraham Lincoln', 'Hutch', 'Herman', 'Laura', 'Mike']"
-70,"['Steven Lee', 'Myers', 'Saddam Hussein', 'Eggen']"
+69,"['Abraham Lincoln', 'Herman', 'Mike', 'Hutch', 'Laura']"
+70,"['Steven Lee', 'Eggen', 'Saddam Hussein', 'Myers']"
 71,['Kelly O Donnell']
-72,"['Patrick Fitzgerald', 'U.S. Attorney Patrick Fitzgerald']"
+72,"['U.S. Attorney Patrick Fitzgerald', 'Patrick Fitzgerald']"
 73,['Andy']
 74,['Hank Paulson']
-75,"['Ramzi bin al-Shibh', 'Steve', 'McCain', 'Hillman', 'Abu Zubaydah', 'Senator McCain', 'John McCain', 'Khalid Sheikh Mohammed']"
+75,"['Abu Zubaydah', 'Hillman', 'McCain', 'Khalid Sheikh Mohammed', 'Steve', 'Senator McCain', 'Ramzi bin al-Shibh', 'John McCain']"
 76,[]
 77,['General Casey']
 78,['Churchill']
 79,"['Anna Kukec', 'Pearson']"
 80,[]
-81,"['Ahmadi-nejad', 'David', 'Mike McConnell', 'John McConnell']"
-82,"['i   David', 'i', 'Hizballah']"
-83,"['Joint Chiefs', 'Grand Ayatollah Ali al-Sistani', 'Sistani', 'Kelly O Donnell', 'Baker', 'Kelly']"
+81,"['David', 'Ahmadi-nejad', 'John McConnell', 'Mike McConnell']"
+82,"['Hizballah', 'i   David', 'i']"
+83,"['Joint Chiefs', 'Kelly O Donnell', 'Grand Ayatollah Ali al-Sistani', 'Kelly', 'Baker', 'Sistani']"
 84,[]
-85,"['Prime Minister Olm', 'Dr. Rice', 'Prime Minister Olmert', 'George Bush']"
+85,"['George Bush', 'Dr. Rice', 'Olmert', 'Olm']"
 86,['Siniora']
 87,"['Bush', 'Caren Bohan']"
-88,"['Armitage', 'Colin', 'Musharraf']"
-89,"['Washington', 'Speaker Boehner']"
-90,"['Bob Woodward', 'Saddam', 'David', 'Axelrod']"
-91,"['Ahmadi-nejad', 'Bret Baier']"
-92,"['Karzai', 'Musharraf']"
-93,"['Julie', 'Michael', 'George Washington']"
+88,"['Musharraf', 'Armitage', 'Colin']"
+89,"['Speaker Boehner', 'Washington']"
+90,"['David', 'Bob Woodward', 'Axelrod', 'Saddam']"
+91,"['Bret Baier', 'Ahmadi-nejad']"
+92,"['Musharraf', 'Karzai']"
+93,"['George Washington', 'Michael', 'Julie']"
 94,[]
-95,"['Solana', 'Javier Solana', 'Javier', 'Larijani', 'Putin']"
-96,"['Roh', 'Hu Jintao', 'Kim Jong Il', 'Prime Minister Koizumi', 'Putin']"
-97,"['Vladimir', 'Vladimir Putin', 'Churchill', 'George', 'Putin']"
-98,"['Ramzi bin al-Shibh', 'Steve', 'McCain', 'Hillman', 'Abu Zubaydah', 'Senator McCain', 'John McCain', 'Khalid Sheikh Mohammed']"
+95,"['Javier', 'Javier Solana', 'Larijani', 'Putin', 'Solana']"
+96,"['Koizumi', 'Roh', 'Putin', 'Hu Jintao', 'Kim Jong Il']"
+97,"['George', 'Putin', 'Vladimir', 'Vladimir Putin', 'Churchill']"
+98,"['Abu Zubaydah', 'Hillman', 'McCain', 'Khalid Sheikh Mohammed', 'Steve', 'Senator McCain', 'Ramzi bin al-Shibh', 'John McCain']"
 99,[]
-100,"['Condi', 'Peter', 'Peter Wallsten', 'Olmert', 'Hizballah', 'Siniora', 'Kofi Annan']"
-101,"['Maliki', 'Patricia Wilson']"
+100,"['Peter Wallsten', 'Siniora', 'Condi', 'Olmert', 'Hizballah', 'Peter', 'Kofi Annan']"
+101,"['Patricia Wilson', 'Maliki']"
 102,['John McCain']
-103,"['Karzai', 'Musharraf']"
-104,"['Prime Minister Olmert', 'Secretary Rice', 'Abbas']"
+103,"['Musharraf', 'Karzai']"
+104,"['Secretary Rice', 'Olmert', 'Abbas']"
 105,['Harper']
-106,"['David Gregory', 'Martha', 'Saddam Hussein', 'Dave', 'Zarqawi']"
+106,"['Martha', 'David Gregory', 'Saddam Hussein', 'Zarqawi', 'Dave']"
 107,['Hank Paulson']
 108,['Fidel Castro']
 109,['John McKinnon']
-110,"['Ann Compton', 'Bush']"
-111,"['Mark Silva', 'North Korean leader', 'Baker', 'Jay Lefkowitz']"
+110,"['Bush', 'Ann Compton']"
+111,"['Baker', 'Jay Lefkowitz', 'North Korean leader', 'Mark Silva']"
 112,[]
-113,"['Usama bin Laden', 'Karzai', 'John Negroponte', 'Musharraf']"
+113,"['John Negroponte', 'Musharraf', 'Karzai', 'Usama bin Laden']"
 114,"['Denny Hastert', 'Daley', 'Patrick Fitzgerald']"
-115,"['David', 'Gary McKinnon', 'Barack', 'Christi Parsons']"
-116,"['Julie', 'Michael', 'George Washington']"
-117,"['Abraham Lincoln', 'Hutch', 'Herman', 'Laura', 'Mike']"
-118,"['Mark', 'Ken', 'Hutcheson']"
-119,"['Condi', 'Prime Ministers Olmert', 'Chancellor Merkel', 'Siniora', 'Prime', 'Prime Minister Blair']"
-120,"['Tony', 'Siniora']"
+115,"['David', 'Barack', 'Gary McKinnon', 'Christi Parsons']"
+116,"['George Washington', 'Michael', 'Julie']"
+117,"['Abraham Lincoln', 'Herman', 'Mike', 'Hutch', 'Laura']"
+118,"['Hutcheson', 'Mark', 'Ken']"
+119,"['Siniora', 'Condi', 'Chancellor Merkel', 'Blair', 's Olmert', 'Prime']"
+120,"['Siniora', 'Tony']"
 121,['General Casey']
 122,['Joe']
 123,[]
-124,"['George Bush', 'Bush']"
-125,"['Jim', 'Richard Benedetto']"
-126,"['Jim', 'Senator Warner', 'General Casey', 'Baker']"
-127,"['Bush', 'Tony Blair', 'Dayton', 'Secretary Rice', 'sue']"
+124,"['Bush', 'George Bush']"
+125,"['Richard Benedetto', 'Jim']"
+126,"['Baker', 'General Casey', 'Senator Warner', 'Jim']"
+127,"['Tony Blair', 'Dayton', 'Bush', 'sue', 'Secretary Rice']"
 128,[]
-129,"['Ben', 'David Petraeus', 'David']"
+129,"['David', 'Ben', 'David Petraeus']"
 130,[]
-131,"['Clinton', 'Jennifer', 'bin Laden', 'Caren']"
+131,"['Jennifer', 'Caren', 'bin Laden', 'Clinton']"
 132,['David Gregory']
-133,"['Prime Minister Koizumi', 'General Casey', 'Koizumi', 'Zarqawi']"
+133,"['Zarqawi', 'General Casey', 'Koizumi']"
 134,[]
 135,"['Schwab', 'John']"
 136,"['Kevin', 'Suzanne Malveaux']"
-137,"['Holly Rosenkrantz', 'Bush']"
+137,"['Bush', 'Holly Rosenkrantz']"
 138,"['House Speaker Hastert', 'Hastert', 'Mark Foley']"
 139,['Ben Bernanke']
 140,['Asad']
 141,[]
 142,"['Steve Holland', 'Colin Powell']"
 143,[]
-144,"['Lee', 'Obama']"
+144,"['Obama', 'Lee']"
 145,"['Paul Mieke', 'Chris']"
 146,[]
 147,['Mike Fitzpatrick']
-148,"['Sarkozy', 'Mark Riley', 'Obama', 'Chancellor Merkel', 'Prime Minister Gillard']"
+148,"['Mark Riley', 'Gillard', 'Sarkozy', 'Obama', 'Chancellor Merkel']"
 149,['Stephen']
-150,"['Norah O Donnel', 'Herman Cain', 'Michele Bachmann']"
-151,"['Roger Runningen', 'Mike', 'Sanger']"
+150,"['Michele Bachmann', 'Herman Cain', 'Norah O Donnel']"
+151,"['Mike', 'Roger Runningen', 'Sanger']"
 152,['Saddam Hussein']
 153,['Saddam Hussein']
 154,[]
-155,"['Condi', 'Abbas', 'Secretary Rice', 'Prime Minister Olmert']"
+155,"['Secretary Rice', 'Abbas', 'Olmert', 'Condi']"
 156,"['General Petraeus', 'Ambassador Crocker']"
-157,"['Mark', 'John McKinnon']"
+157,"['John McKinnon', 'Mark']"
 158,['General Abizaid']
 159,[]
-160,"['Condi', 'Jim Axelrod', 'Abbas', 'Bill Burns', 'Siniora', 'Dick Armitage', 'Colin Powell']"
+160,"['Bill Burns', 'Siniora', 'Condi', 'Colin Powell', 'Abbas', 'Dick Armitage', 'Jim Axelrod']"
 161,[]
-162,"['Ahmadi-nejad', 'David', 'Mike McConnell', 'John McConnell']"
-163,"['European  Norah O Donnell', 'Sarkozy', 'Barroso', 'Berlusconi', 'Merkel', 'Norah O Donnell']"
-164,"['Karzai', 'bin Laden', 'Musharraf']"
-165,"['Mussolini', 'Paks', 'Allen', 'bin Laden', 'Hitler', 'Richard', 'Musharraf', 'Usama bin Laden']"
+162,"['David', 'Ahmadi-nejad', 'John McConnell', 'Mike McConnell']"
+163,"['Sarkozy', 'European  Norah O Donnell', 'Berlusconi', 'Norah O Donnell', 'Barroso', 'Merkel']"
+164,"['bin Laden', 'Musharraf', 'Karzai']"
+165,"['bin Laden', 'Richard', 'Hitler', 'Usama bin Laden', 'Allen', 'Musharraf', 'Mussolini', 'Paks']"
 166,['Hamdan']
 167,[]
 168,[]
-169,"['George', 'Vladimir', 'Dmitry Medvedev']"
-170,"['Roh', 'Hu Jintao', 'Kim Jong Il', 'Prime Minister Koizumi', 'Putin']"
+169,"['Vladimir', 'George', 'Dmitry Medvedev']"
+170,"['Koizumi', 'Roh', 'Putin', 'Hu Jintao', 'Kim Jong Il']"
 171,['General Casey']
 172,[]
-173,"['Roh', 'Condi', 'Hu Jintao', 'Vladimir Putin', 'Prime Minister Koizumi']"
-174,"['Hu Jintao', 'Jim Rutenberg', 'Chinese   Jim', 'Jong Il']"
-175,"['Bill Plante', 'Putin']"
-176,"['General Petraeus', 'Vice  Hashimi', 'Ambassador Crocker']"
+173,"['Koizumi', 'Roh', 'Condi', 'Vladimir Putin', 'Hu Jintao']"
+174,"['Jong Il', 'Hu Jintao', 'Chinese   Jim', 'Jim Rutenberg']"
+175,"['Putin', 'Bill Plante']"
+176,"['General Petraeus', 'Ambassador Crocker', 'Vice  Hashimi']"
 177,['Jackie Calmes']
-178,"['Karzai', 'Lady', 'Bush']"
+178,"['Bush', 'Karzai', 'Lady']"
 179,[]
-180,"['Ann Compton', 'Bush']"
+180,"['Bush', 'Ann Compton']"
 181,[]
-182,"['Blair', 'Saddam', 'Zarqawi', 'Maliki']"
-183,"['Armitage', 'Colin', 'Musharraf']"
+182,"['Zarqawi', 'Blair', 'Saddam', 'Maliki']"
+183,"['Musharraf', 'Armitage', 'Colin']"
 184,[]
 185,['Usama bin Laden']
 186,[]
 187,['Norah']
-188,"['McCain', 'Senator Obama', 'Obama', 'Senator McCain', 'Jim']"
-189,"['Steve Holland', 'Hu Jintao', 'Kim Jong Il', 'Bush']"
-190,"['Prime Minister Siniora', 'Tabassum Zakaria', 'Abbas', 'Olmert', 'Toby', 'Siniora', 'Maliki', 'Deb']"
+188,"['Jim', 'Senator Obama', 'McCain', 'Obama', 'Senator McCain']"
+189,"['Steve Holland', 'Bush', 'Hu Jintao', 'Kim Jong Il']"
+190,"['Siniora', 'Olmert', 'Abbas', 'Deb', 'Toby', 'Tabassum Zakaria', 'Maliki']"
 191,['Harper']
-192,"['Jim', 'Senator Warner', 'General Casey', 'Baker']"
-193,"['Lee Myung-bak', 'Obama']"
+192,"['Baker', 'General Casey', 'Senator Warner', 'Jim']"
+193,"['Obama', 'Lee Myung-bak']"
 194,['Baker']
 195,[]
 196,[]
-197,"['Bret', 'NP Don Gonyea', 'Usama bin Laden']"
+197,"['Usama bin Laden', 'NP Don Gonyea', 'Bret']"
 198,[]
-199,"['David', 'Gary McKinnon', 'Barack', 'Christi Parsons']"
-200,"['George', 'Vladimir', 'Dmitry Medvedev']"
+199,"['David', 'Barack', 'Gary McKinnon', 'Christi Parsons']"
+200,"['Vladimir', 'George', 'Dmitry Medvedev']"
 201,[]
-202,"['Karzai', 'Musharraf']"
+202,"['Musharraf', 'Karzai']"
 203,['Saddam Hussein']
-204,"['Mark', 'Ken', 'Hutcheson']"
-205,"['Washington', 'Speaker Boehner']"
+204,"['Hutcheson', 'Mark', 'Ken']"
+205,"['Speaker Boehner', 'Washington']"
 206,['Mike Fitzpatrick']
 207,[]
-208,"['Condi', 'Prime Minister Siniora', 'Abbas', 'Nabih Berri', 'Siniora', 'Secretary Rice', 'Speaker Berri', 'Suzanne']"
+208,"['Speaker Berri', 'Siniora', 'Condi', 'Abbas', 'Nabih Berri', 'Suzanne', 'Secretary Rice']"
 209,[]
-210,"['Matt Spetalnick', 'Prime Minister']"
-211,"['Roh', 'Hu Jintao', 'Kim Jong Il', 'Prime Minister Koizumi', 'Putin']"
+210,['Matt Spetalnick']
+211,"['Koizumi', 'Roh', 'Putin', 'Hu Jintao', 'Kim Jong Il']"
 212,['Kim Jong Un']
-213,"['Occupy Wall Street', 'Richard Cordray', 'Dodd-Frank']"
-214,"['John McCain', 'Dave']"
-215,"['Bush', 'Tony Blair', 'Dayton', 'Secretary Rice', 'sue']"
+213,"['Occupy Wall Street', 'Dodd-Frank', 'Richard Cordray']"
+214,"['Dave', 'John McCain']"
+215,"['Tony Blair', 'Dayton', 'Bush', 'sue', 'Secretary Rice']"
 216,['Siniora']
-217,"['General Petraeus', 'David Petraeus', 'Ambassador Crocker', 'Dennis Shanahan', 'Ryan Crocker', 'Suzanne']"
+217,"['David Petraeus', 'Ambassador Crocker', 'Ryan Crocker', 'General Petraeus', 'Dennis Shanahan', 'Suzanne']"
 218,['Kim Jong Il']
-219,"['Steve Holland', 'Vladimir', 'Vladimir Putin']"
-220,"['Michael Fletcher', 'David', 'Kim Jong Il']"
-221,"['Vladimir', 'Vladimir Putin', 'Churchill', 'George', 'Putin']"
-222,"['Vladimir', 'Vladimir Putin', 'Churchill', 'George', 'Putin']"
-223,"['George', 'Vladimir', 'Dmitry Medvedev']"
+219,"['Vladimir', 'Steve Holland', 'Vladimir Putin']"
+220,"['David', 'Michael Fletcher', 'Kim Jong Il']"
+221,"['George', 'Putin', 'Vladimir', 'Vladimir Putin', 'Churchill']"
+222,"['George', 'Putin', 'Vladimir', 'Vladimir Putin', 'Churchill']"
+223,"['Vladimir', 'George', 'Dmitry Medvedev']"
 224,['House Minority Leader Nancy Pelosi']
-225,"['David Gregory', 'Martha', 'Saddam Hussein', 'Dave', 'Zarqawi']"
-226,"['Steve', 'n   Steve', 'Kim Jong Il', 'Jim', 'Putin']"
+225,"['Martha', 'David Gregory', 'Saddam Hussein', 'Zarqawi', 'Dave']"
+226,"['n   Steve', 'Jim', 'Putin', 'Steve', 'Kim Jong Il']"
 227,['Lee']
-228,"['David Brooks', 'Saddam', 'Saddam Hussein', 'Martha Raddatz', 'Secretary Gates', 'Robert Gates']"
+228,"['David Brooks', 'Robert Gates', 'Saddam Hussein', 'Martha Raddatz', 'Secretary Gates', 'Saddam']"
 229,['Stephen']
 230,['John McCain']
-231,"['Steve Holland', 'Vladimir', 'Vladimir Putin']"
-232,"['Peter', 'Peter Baker', 'Sheryl']"
+231,"['Vladimir', 'Steve Holland', 'Vladimir Putin']"
+232,"['Peter', 'Sheryl', 'Peter Baker']"
 233,['Secretary Rice']
 234,['Stephen']
-235,"['Secretary Chertoff', 'Bob']"
+235,"['Bob', 'Secretary Chertoff']"
 236,"['Schwab', 'John']"
 237,[]
-238,"['Clinton', 'Jennifer', 'bin Laden', 'Caren']"
-239,"['Maliki', 'Saddam', 'Obama', 'Prime Minister Maliki']"
-240,"['Fletch', 'Michael', 'Ben Bernanke', 'Roger']"
+238,"['Jennifer', 'Caren', 'bin Laden', 'Clinton']"
+239,"['Obama', 'Saddam', 'Maliki']"
+240,"['Roger', 'Fletch', 'Michael', 'Ben Bernanke']"
 241,[]
 242,[]
-243,"['Bill Plante', 'Putin']"
-244,"['David', 'Gary McKinnon', 'Barack', 'Christi Parsons']"
+243,"['Putin', 'Bill Plante']"
+244,"['David', 'Barack', 'Gary McKinnon', 'Christi Parsons']"
 245,[]
 246,[]
 247,[]
 248,['David']
-249,"['Baier', 'Bret Baier']"
-250,"['David Brooks', 'Saddam', 'Saddam Hussein', 'Martha Raddatz', 'Secretary Gates', 'Robert Gates']"
-251,"['Bill Plante', 'Putin']"
+249,"['Bret Baier', 'Baier']"
+250,"['David Brooks', 'Robert Gates', 'Saddam Hussein', 'Martha Raddatz', 'Secretary Gates', 'Saddam']"
+251,"['Putin', 'Bill Plante']"
 252,[]
-253,"['David', 'Queen', 'Britain', 'Her Majesty', 'Palestinian', 'Barack']"
+253,"['Britain', 'Barack', 'Palestinian', 'Queen', 'David', 'Her Majesty']"
 254,[]
-255,"['Israeli   Abbas', 'Putin', 'Bush']"
-256,"['Bush', 'Tony Blair', 'Dayton', 'Secretary Rice', 'sue']"
+255,"['Bush', 'Israeli', 'Abbas', 'Putin', 'Israeli   Abbas']"
+256,"['Tony Blair', 'Dayton', 'Bush', 'sue', 'Secretary Rice']"
 257,['Mark Silva']
-258,"['Senator', 'Matt']"
-259,"['George Casey', 'Martha', 'Allen', 'commanders', 'Saddam', 'General John Abizaid', 'John Abizaid', 'Richard', 'General Casey']"
+258,"['Matt', 'Senator']"
+259,"['Richard', 'Martha', 'General John Abizaid', 'Allen', 'George Casey', 'General Casey', 'John Abizaid', 'Saddam', 'commanders']"
 260,[]
 261,[]
 262,['Norah']
@@ -266,44 +266,44 @@
 264,[]
 265,[]
 266,['Kim Jong Il']
-267,"['Mark Sanchez', 'Obama', '. Zavala']"
-268,"['Tom', 'General Dempsey', 'Prime Minister', 'General Casey']"
-269,"['Matt Spetalnick', 'Prime Minister']"
-270,"['Richard', 'Ron Hutcheson', 'Kofi Annan']"
-271,"['Steve', 'n   Steve', 'Kim Jong Il', 'Jim', 'Putin']"
+267,"['Obama', '. Zavala', 'Mark Sanchez']"
+268,"['General Casey', 'General Dempsey', 'Tom']"
+269,['Matt Spetalnick']
+270,"['Richard', 'Kofi Annan', 'Ron Hutcheson']"
+271,"['n   Steve', 'Jim', 'Putin', 'Steve', 'Kim Jong Il']"
 272,['Chip Reid']
 273,"['Dave', 'Libby', 'i     Dave']"
 274,['Usama bin Laden']
-275,"['Obama', 'Kikwete', 'Barack', 'Bush']"
-276,"['Joint Chiefs', 'Grand Ayatollah Ali al-Sistani', 'Sistani', 'Kelly O Donnell', 'Baker', 'Kelly']"
-277,"['Ben', 'David Petraeus', 'David']"
-278,"['Nancy Pelosi', 'Rutenberg', 'Jim Rutenberg', 'Suzanne']"
-279,"['Karzai', 'Lady', 'Bush']"
+275,"['Obama', 'Barack', 'Bush', 'Kikwete']"
+276,"['Joint Chiefs', 'Kelly O Donnell', 'Grand Ayatollah Ali al-Sistani', 'Kelly', 'Baker', 'Sistani']"
+277,"['David', 'Ben', 'David Petraeus']"
+278,"['Rutenberg', 'Suzanne', 'Nancy Pelosi', 'Jim Rutenberg']"
+279,"['Bush', 'Karzai', 'Lady']"
 280,['Ben Bernanke']
 281,[]
 282,"['Richard Wolf', 'Wolf']"
-283,"['George Bush', 'Bush']"
-284,"['Karzai', 'Lady', 'Bush']"
-285,"['Patrick Fitzgerald', 'U.S. Attorney Patrick Fitzgerald']"
+283,"['Bush', 'George Bush']"
+284,"['Bush', 'Karzai', 'Lady']"
+285,"['U.S. Attorney Patrick Fitzgerald', 'Patrick Fitzgerald']"
 286,[]
 287,[]
-288,"['Obama', 'Kikwete', 'Barack', 'Bush']"
-289,"['General-Secretary', 'Moon', 'Marvin', 'Morales', 'Secretary-General']"
-290,"['Roger Runningen', 'Mike', 'Sanger']"
+288,"['Obama', 'Barack', 'Bush', 'Kikwete']"
+289,"['Marvin', 'Secretary-General', 'Morales', 'Moon', 'General-Secretary']"
+290,"['Mike', 'Roger Runningen', 'Sanger']"
 291,"['Zarqawi', 'Saddam Hussein']"
 292,['General Abizaid']
-293,"['Occupy Wall Street', 'Richard Cordray', 'Dodd-Frank']"
+293,"['Occupy Wall Street', 'Dodd-Frank', 'Richard Cordray']"
 294,[]
-295,"['Ahmadi-nejad', 'Bret Baier']"
-296,"['U.S.    Musharraf', 'Pope', 'Musharraf']"
+295,"['Bret Baier', 'Ahmadi-nejad']"
+296,"['Musharraf', 'U.S.    Musharraf', 'Pope']"
 297,[]
-298,"['Ahmadi-nejad', 'Roger Runningen']"
-299,"['Condi', 'Prime Ministers Olmert', 'Chancellor Merkel', 'Siniora', 'Prime', 'Prime Minister Blair']"
-300,['Prime Minister Maliki']
-301,"['John', 'Senator Kennedy', 'man Boehner', 'Senator Enzi', 'man Miller', 'Bill']"
-302,"['Tom', 'General Dempsey', 'Prime Minister', 'General Casey']"
-303,"['Bret', 'NP Don Gonyea', 'Usama bin Laden']"
+298,"['Roger Runningen', 'Ahmadi-nejad']"
+299,"['Siniora', 'Condi', 'Chancellor Merkel', 'Blair', 's Olmert', 'Prime']"
+300,['Maliki']
+301,"['Senator Enzi', 'Senator Kennedy', 'John', 'man Miller', 'Bill', 'man Boehner']"
+302,"['General Casey', 'General Dempsey', 'Tom']"
+303,"['Usama bin Laden', 'NP Don Gonyea', 'Bret']"
 304,['Condi']
-305,"['Bill Plante', 'Putin']"
-306,"['April', 'Don Powell', 'April Ryan']"
+305,"['Putin', 'Bill Plante']"
+306,"['Don Powell', 'April Ryan', 'April']"
 307,[]

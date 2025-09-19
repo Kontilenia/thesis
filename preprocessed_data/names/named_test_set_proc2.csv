@@ -6,15 +6,15 @@
 4,   General Casey;  General Casey
 5,   ;  ;  ;;  Hutcheson;  Mark;  Ken
 6, Jim;  Senator Warner;  Baker;  General Casey
-7, Nabih Berri;  Secretary Rice;  Suzanne;    Siniora;  Abbas;  Condi;  Prime Minister Siniora;  Speaker Berri; 
-8, Secretary Rice;  Condi;   Abbas;  Prime Minister Olmert; 
+7, Nabih Berri;  Secretary Rice;  Suzanne;    Siniora;  Abbas;  Condi;   Siniora;  Speaker Berri; 
+8, Secretary Rice;  Condi;   Abbas;   Olmert; 
 9,
 10, Vladimir Putin;  Vladimir;   Vladimir Putin;  Steve Holland
 11,
 12,   Mike;  Abraham Lincoln;  Herman;  Hutch;  Laura
 13, Dmitry Medvedev;  George;  Vladimir;  
 14, Senator Warner;  James Baker;  Steve;  Senator Warner;  General Casey;  Jimmy Baker;  Lee Hamilton;;   Baker;  Steve;  Jimmy Baker;  Lee Hamilton;  Martha Raddatz
-15,   Prime Minister Blair;   David Gregory
+15,    Blair;   David Gregory
 16,     Mark;  John McKinnon; 
 17, Joe Lieberman
 18,   Sheryl;   Peter;  Peter Baker
@@ -22,11 +22,11 @@
 20, Olmert;  Bush;          Bush;     George Bush;  Anne Gearan
 21,  Asad; 
 22,
-23, Chancellor Merkel;  Prime Minister Gillard;   Sarkozy;  Chancellor Merkel;    Obama;  Mark Riley
+23, Chancellor Merkel;   Gillard;   Sarkozy;  Chancellor Merkel;    Obama;  Mark Riley
 24,
 25,   Harper;  
 26,  Siniora;  Tony;       ;  ;  
-27, Chancellor Merkel;  Prime Minister Gillard;   Sarkozy;  Chancellor Merkel;    Obama;  Mark Riley
+27, Chancellor Merkel;   Gillard;   Sarkozy;  Chancellor Merkel;    Obama;  Mark Riley
 28,   Saddam Hussein;  Zarqawi; ;  Martha;  Dave;  David Gregory
 29,  Putin;   Solana;   Larijani;  Javier; 
 30,  Lee; 
@@ -36,7 +36,7 @@
 34,  Jim;  Sheryl Gay Stolberg
 35,
 36,
-37,     Secretary Rice;  Prime Minister Olmert;   Abbas;  
+37,     Secretary Rice;   Olmert;   Abbas;  
 38,   Senator Jon Kyl;   Ronald Reagan;  Bush I;  Bush II;  Clinton;    ; ;  Karen DeYoung
 39,   John;      John;  
 40,   Robert Gates;  David Brooks;  Saddam;  Martha Raddatz
@@ -84,7 +84,7 @@
 82,   i   David;   
 83,   Grand Ayatollah Ali al-Sistani;    Sistani;  Kelly;  Kelly O Donnell
 84,
-85,        Prime Minister Olm; 
+85,         Olm; 
 86, Siniora; 
 87,   Bush; 
 88,  Musharraf;    Armitage;  Colin;    Colin
@@ -95,7 +95,7 @@
 93, Julie;  Michael;  George Washington;  
 94,
 95,  Putin;   Solana;   Larijani;  Javier; 
-96,   ;  Kim Jong Il;  Hu Jintao;   Putin;  Prime Minister Koizumi;; 
+96,   ;  Kim Jong Il;  Hu Jintao;   Putin;   Koizumi;; 
 97,  Putin;  Vladimir;  Vladimir Putin;  George;    ;  ;  Churchill
 98, McCain;  Khalid Sheikh Mohammed;  Ramzi bin al-Shibh; ;  John McCain;  Steve;  Hillman; 
 99,
@@ -103,7 +103,7 @@
 101,   ;   ;  ;  Patricia Wilson
 102, John McCain;  ; 
 103,   Musharraf;   Karzai;  ; 
-104,     Secretary Rice;  Prime Minister Olmert;   Abbas;  
+104,     Secretary Rice;   Olmert;   Abbas;  
 105,   Harper;  
 106,   Saddam Hussein;  Zarqawi; ;  Martha;  Dave;  David Gregory
 107,  Hank Paulson; 
@@ -118,7 +118,7 @@
 116, Julie;  Michael;  George Washington;  
 117,   Mike;  Abraham Lincoln;  Herman;  Hutch;  Laura
 118,   ;  ;  ;;  Hutcheson;  Mark;  Ken
-119,   Prime Minister Blair;  Chancellor Merkel;  Prime
+119,    Blair;  Chancellor Merkel;  Prime
 120,  Siniora;  Tony;       ;  ;  
 121,   General Casey;  General Casey
 122, Joe;  Joe;  
@@ -132,7 +132,7 @@
 130,
 131,  Clinton;  bin Laden;  Caren;  Jennifer;   ;   ;   ; 
 132, David Gregory
-133,   ;  ;;   Zarqawi;   Koizumi;  Prime Minister Koizumi;   General Casey; 
+133,   ;  ;;   Zarqawi;   Koizumi;   Koizumi;   General Casey; 
 134,
 135,   John;  Schwab;  
 136,  Kevin;  Suzanne Malveaux
@@ -147,14 +147,14 @@
 145, Chris;  Paul Mieke
 146,
 147, Mike Fitzpatrick
-148, Chancellor Merkel;  Prime Minister Gillard;   Sarkozy;  Chancellor Merkel;    Obama;  Mark Riley
+148, Chancellor Merkel;   Gillard;   Sarkozy;  Chancellor Merkel;    Obama;  Mark Riley
 149,     Stephen;   
 150,   Herman Cain;  Michele Bachmann;; 
 151,  Mike;  Sanger;  ;  Roger Runningen
 152,   Saddam Hussein;  Saddam Hussein; 
 153,   Saddam Hussein;  Saddam Hussein; 
 154,
-155, Secretary Rice;  Condi;   Abbas;  Prime Minister Olmert; 
+155, Secretary Rice;  Condi;   Abbas;   Olmert; 
 156,   General Petraeus;  Ambassador Crocker
 157,     Mark;  John McKinnon; 
 158,   General Abizaid;    
@@ -169,7 +169,7 @@
 167,
 168,
 169, Dmitry Medvedev;  George;  Vladimir;  
-170,   ;  Kim Jong Il;  Hu Jintao;   Putin;  Prime Minister Koizumi;; 
+170,   ;  Kim Jong Il;  Hu Jintao;   Putin;   Koizumi;; 
 171,   General Casey;   
 172,
 173,  Hu Jintao;  Vladimir Putin;   Roh;   
@@ -189,7 +189,7 @@
 187,  ;  ;  Norah;   
 188, McCain;  Obama;  Jim
 189,   Bush;  Kim Jong Il;  Hu Jintao;  ;   Steve Holland
-190, Deb;  Maliki;  Prime Minister Siniora;  Olmert;  Abbas;  Maliki;    Toby;  Tabassum Zakaria
+190, Deb;  Maliki;   Siniora;  Olmert;  Abbas;  Maliki;    Toby;  Tabassum Zakaria
 191,   Harper;  
 192, Jim;  Senator Warner;  Baker;  General Casey
 193,  Lee Myung-bak;   Obama;   
@@ -207,10 +207,10 @@
 205,  Washington;  Speaker Boehner;  ;  ;    ; ; 
 206, Mike Fitzpatrick
 207,
-208, Nabih Berri;  Secretary Rice;  Suzanne;    Siniora;  Abbas;  Condi;  Prime Minister Siniora;  Speaker Berri; 
+208, Nabih Berri;  Secretary Rice;  Suzanne;    Siniora;  Abbas;  Condi;   Siniora;  Speaker Berri; 
 209,
 210,      Matt Spetalnick
-211,   ;  Kim Jong Il;  Hu Jintao;   Putin;  Prime Minister Koizumi;; 
+211,   ;  Kim Jong Il;  Hu Jintao;   Putin;   Koizumi;; 
 212, Kim Jong Un
 213,   Dodd-Frank;  Occupy Wall Street; ;   Richard Cordray;  
 214, John McCain;  Dave;  Dave; 
@@ -238,7 +238,7 @@
 236,   John;  Schwab;  
 237,
 238,  Clinton;  bin Laden;  Caren;  Jennifer;   ;   ;   ; 
-239, Prime Minister Maliki;  Obama;    Saddam; 
+239,  Maliki;  Obama;    Saddam; 
 240, Roger;  Ben Bernanke;  Fletch;  Michael
 241,
 242,
@@ -298,8 +298,8 @@
 296, U.S.    Musharraf;  Pope;   
 297,
 298, Ahmadi-nejad;  Roger Runningen
-299,   Prime Minister Blair;  Chancellor Merkel;  Prime
-300, Prime Minister Maliki
+299,    Blair;  Chancellor Merkel;  Prime
+300,  Maliki
 301,          Senator Kennedy;  man Miller;  Senator Enzi;  
 302,       General Casey;  General Dempsey;  General Casey;    Tom
 303,    Bret;  ;  Usama bin Laden;  
