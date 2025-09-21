@@ -128,8 +128,8 @@ def load_qevasion_dataset(tokenizer: PreTrainedTokenizer,
     # print("Example of train test:" + train_texts[1])
     # print("Example of validation test:" + validation_texts[1])
 
-    train_texts = train_texts # [:20]
-    validation_texts = validation_texts # [:2]
+    train_texts = train_texts #[:20]
+    validation_texts = validation_texts #[:2]
     return (CustomTextDataset(train_texts, tokenizer),
             CustomTextDataset(validation_texts, tokenizer))
 
@@ -183,17 +183,22 @@ def finetuning(model_name: str,
             bnb_4bit_compute_dtype=torch.bfloat16
         ),
         device_map='auto',
-        torch_dtype=torch.float16,
+        dtype=torch.float16,
         cache_dir=cache_dir
     )
 
-    tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir,
-                                              trust_remote_code=True,)
-
-    tokenizer.pad_token = tokenizer.eos_token
-
-    # !TODO: Check if this helps
-    # tokenizer.pad_token_id = tokenizer.eos_token_id
+    if "llama" not in model_name:
+        # Mistral/Ministral or other models        
+        tokenizer = AutoTokenizer.from_pretrained(model_name,
+                                                 cache_dir=cache_dir,
+                                                 legacy= False) 
+        tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+        model.resize_token_embeddings(len(tokenizer))
+    else:
+        # LLaMA models
+        tokenizer = AutoTokenizer.from_pretrained(model_name,
+                                              cache_dir=cache_dir)
+        tokenizer.pad_token = tokenizer.eos_token
 
     for param in model.parameters():
         param.requires_grad = False  # Freeze the model - train adapters later
@@ -522,24 +527,24 @@ def create_labels_train_set(df: pd.DataFrame) -> pd.DataFrame:
     """
 
     clarity_mapping ={
-    'explicit': 'direct reply',
-    'implicit': 'indirect',
-    'dodging': "indirect",
-    'deflection': "indirect",
-    'partial/half-answer': "indirect",
-    'general': "indirect",
-    'contradictory': "indirect",
-    'declining_to_answer': "direct non-reply",
-    'claims_ignorance': "direct non-reply",
-    'clarification': "direct non-reply",
-    'diffusion': "indirect",
+        'explicit': 'direct reply',
+        'implicit': 'indirect',
+        'dodging': "indirect",
+        'deflection': "indirect",
+        'partial/half-answer': "indirect",
+        'general': "indirect",
+        'contradictory': "indirect",
+        'declining_to_answer': "direct non-reply",
+        'claims_ignorance': "direct non-reply",
+        'clarification': "direct non-reply",
+        'diffusion': "indirect",
     }
     
     df["clarity_label"] = df["label"].map(clarity_mapping)
     df.rename(columns={"label": "evasion_label"}, inplace=True)
     return df
-    
-# !TODO: Make the logic of the function better
+
+
 def evaluate(base_model_name: str,
              fine_tuned_model_path: str,
              train_label_name: str,
@@ -567,7 +572,6 @@ def evaluate(base_model_name: str,
     """
 
     if not model:
-
         model = AutoModelForCausalLM.from_pretrained(
             fine_tuned_model_path,
             return_dict=True,
@@ -576,18 +580,26 @@ def evaluate(base_model_name: str,
                 load_in_4bit=True,
                 bnb_4bit_compute_dtype=torch.bfloat16
             ),
-            # torch_dtype=torch.float16,
+            # dtype=torch.float16,
             device_map="auto",
             trust_remote_code=True,
             offload_folder="offload/",
             cache_dir=cache_dir
         )
+        
     if not tokenizer:
-        tokenizer = AutoTokenizer.from_pretrained(base_model_name,
+        if "llama" not in base_model_name:
+            # Mistral/Ministral or other models        
+            tokenizer = AutoTokenizer.from_pretrained(base_model_name,
+                                                     cache_dir=cache_dir,
+                                                     legacy= False) 
+            tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+            model.resize_token_embeddings(len(tokenizer))
+        else:
+            # LLaMA models
+            tokenizer = AutoTokenizer.from_pretrained(base_model_name,
                                                   cache_dir=cache_dir)
-
-    tokenizer.pad_token = tokenizer.eos_token
-    # tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+            tokenizer.pad_token = tokenizer.eos_token
 
     list_of_columns = [
         'question',
@@ -604,7 +616,7 @@ def evaluate(base_model_name: str,
     test_df = pd.read_csv(test_set_path)[list_of_columns]
     
     # creating bool series False for NaN values
-    test_df = test_df[test_df["evasion_label"].notnull()]
+    test_df = test_df[test_df["evasion_label"].notnull()] #.iloc[:10]
 
     if added_name_summary:
         test_texts = create_test_prompted_text_name_summaries(test_df, train_label_name)     
@@ -620,38 +632,8 @@ def evaluate(base_model_name: str,
     y_pred = predict(dataset, labels, model, tokenizer, True)
     y_pred = pd.DataFrame({"label": y_pred})
     y_pred_evasion_based = create_labels_train_set(y_pred)[test_label_name]
-    print("----")
-    print(y_pred_evasion_based)
-    print("----")
     y_true = test_df[test_label_name].str.lower()
-    print("----")
-    print(y_true)
-    print("----")
-    print(test_labels)
     evaluation_report(y_true, y_pred_evasion_based, test_labels, run)
-
-    # # Get train set data
-    # train_df = pd.read_csv('preprocessed_data/train_set.csv')[[
-    #     'question',
-    #     'interview_question',
-    #     'interview_answer',
-    #     train_label_name
-    # ]] # [:20]
-
-    # np.random.seed(2024)
-    # msk = np.random.rand(len(train_df)) < 0.9
-    # validation_df = train_df[~msk]
-
-    # train_texts = create_test_prompted_text(validation_df, train_label_name)
-    # dataset = pd.DataFrame(train_texts, columns=['text'])
-
-    # labels = [label.lower() for label in list(validation_df[train_label_name].unique())]
-
-    # y_pred = predict(dataset, labels, model, tokenizer, True)
-    # y_pred = pd.Series(y_pred, name=train_label_name)
-    # y_true = validation_df[train_label_name].str.lower()
-    # evaluation_report(y_true, y_pred, labels, run)
-
 
 def inference(base_model_name: str,
               fine_tuned_model_path: str,
@@ -681,17 +663,25 @@ def inference(base_model_name: str,
                 load_in_4bit=True,
                 bnb_4bit_compute_dtype=torch.bfloat16
             ),
-            # torch_dtype=torch.float16,
+            # dtype=torch.float16,
             device_map="auto",
             trust_remote_code=True,
             offload_folder="offload/",
             cache_dir=cache_dir
         )
     if not tokenizer:
-        tokenizer = AutoTokenizer.from_pretrained(base_model_name,
+        if "llama" not in base_model_name:
+            # Mistral/Ministral or other models        
+            tokenizer = AutoTokenizer.from_pretrained(base_model_name,
+                                                     cache_dir=cache_dir,
+                                                     legacy= False) 
+            tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+            model.resize_token_embeddings(len(tokenizer))
+        else:
+            # LLaMA models
+            tokenizer = AutoTokenizer.from_pretrained(base_model_name,
                                                   cache_dir=cache_dir)
-
-    tokenizer.add_special_tokens({'pad_token': '[PAD]'})
+            tokenizer.pad_token = tokenizer.eos_token
 
     # Get test set data
     test_df = pd.read_csv('preprocessed_data/test_set.csv')[[
@@ -699,7 +689,7 @@ def inference(base_model_name: str,
         'interview_question',
         'interview_answer',
         label_name
-    ]]  # [:20]
+    ]] # [:20]
 
     test_texts = create_inference_prompted_text(test_df, label_name)
     dataset = pd.DataFrame(test_texts, columns=['text'])
