@@ -191,14 +191,12 @@ def finetuning(model_name: str,
         # Mistral/Ministral or other models        
         tokenizer = AutoTokenizer.from_pretrained(model_name,
                                                  cache_dir=cache_dir,
-                                                 legacy= False) 
-        tokenizer.add_special_tokens({'pad_token': '[PAD]'})
-        model.resize_token_embeddings(len(tokenizer))
+                                                 legacy=False) 
     else:
         # LLaMA models
         tokenizer = AutoTokenizer.from_pretrained(model_name,
                                               cache_dir=cache_dir)
-        tokenizer.pad_token = tokenizer.eos_token
+    tokenizer.pad_token = tokenizer.eos_token
 
     for param in model.parameters():
         param.requires_grad = False  # Freeze the model - train adapters later
@@ -592,14 +590,12 @@ def evaluate(base_model_name: str,
             # Mistral/Ministral or other models        
             tokenizer = AutoTokenizer.from_pretrained(base_model_name,
                                                      cache_dir=cache_dir,
-                                                     legacy= False) 
-            tokenizer.add_special_tokens({'pad_token': '[PAD]'})
-            model.resize_token_embeddings(len(tokenizer))
+                                                     legacy=False) 
         else:
             # LLaMA models
             tokenizer = AutoTokenizer.from_pretrained(base_model_name,
-                                                  cache_dir=cache_dir)
-            tokenizer.pad_token = tokenizer.eos_token
+                                                  cache_dir=cache_dir)   
+        tokenizer.pad_token = tokenizer.eos_token
 
     list_of_columns = [
         'question',
@@ -674,14 +670,12 @@ def inference(base_model_name: str,
             # Mistral/Ministral or other models        
             tokenizer = AutoTokenizer.from_pretrained(base_model_name,
                                                      cache_dir=cache_dir,
-                                                     legacy= False) 
-            tokenizer.add_special_tokens({'pad_token': '[PAD]'})
-            model.resize_token_embeddings(len(tokenizer))
+                                                     legacy=False) 
         else:
             # LLaMA models
             tokenizer = AutoTokenizer.from_pretrained(base_model_name,
                                                   cache_dir=cache_dir)
-            tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.pad_token = tokenizer.eos_token
 
     # Get test set data
     test_df = pd.read_csv('preprocessed_data/test_set.csv')[[
