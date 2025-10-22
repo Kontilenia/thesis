@@ -129,7 +129,7 @@ def load_qevasion_dataset(tokenizer: PreTrainedTokenizer,
     # print("Example of train test:" + train_texts[1])
     # print("Example of validation test:" + validation_texts[1])
 
-    train_texts = train_texts #[:20]
+    train_texts = train_texts # [:20]
     validation_texts = validation_texts #[:2]
     return (CustomTextDataset(train_texts, tokenizer),
             CustomTextDataset(validation_texts, tokenizer))
@@ -323,17 +323,6 @@ def create_test_prompted_text_name_summaries(dataset: pd.DataFrame,
     classes_names = ', '.join(list(dataset[label_name].unique()))
 
     for _, row in dataset.iterrows():
-        # texts.append(
-        #     f"You will be given a part of an interview."
-        #     f"Classify the response to the selected question"
-        #     f"into one of the following categories: {classes_names}"
-        #     f"Output ONLY the label, nothing else.\n"
-        #     f". \n\n ### Part of the interview ### \nIntervier:"
-        #     f" {row['interview_question']} \nResponse:"
-        #     f" {row['interview_answer']} \n\n### Selected Question: ###\n"
-        #     f" {row['names_information']} \n\n### Information about mentioned people: ###\n"
-        #     f"{row['question']} \n\nLabel:"
-        # )
         texts.append(
             f"You will be given a part of an interview."
             f"Classify the response to the selected question"
@@ -342,12 +331,23 @@ def create_test_prompted_text_name_summaries(dataset: pd.DataFrame,
             f". \n\n ### Part of the interview ### \nIntervier:"
             f" {row['interview_question']} \nResponse:"
             f" {row['interview_answer']} \n\n### Selected Question: ###\n"
-            f" {row['names_information']} \n\n### Content about mentioned people: ###\n"
-            f"Classify the response to the selected question (not the context)"
-            f"into one of the following categories: {classes_names}"
-            f"Output ONLY the label, nothing else.\n"
+            f" {row['names_information']} \n\n### Information about mentioned people: ###\n"
             f"{row['question']} \n\nLabel:"
         )
+        # texts.append(
+        #     f"You will be given a part of an interview."
+        #     f"Classify the response to the selected question"
+        #     f"into one of the following categories: {classes_names}"
+        #     f"Output ONLY the label, nothing else.\n"
+        #     f". \n\n ### Part of the interview ### \nIntervier:"
+        #     f" {row['interview_question']} \nResponse:"
+        #     f" {row['interview_answer']} \n\n### Selected Question: ###\n"
+        #     f" {row['names_information']} \n\n### Content about mentioned people: ###\n"
+        #     f"Classify the response to the selected question (not the context)"
+        #     f"into one of the following categories: {classes_names}"
+        #     f"Output ONLY the label, nothing else.\n"
+        #     f"{row['question']} \n\nLabel:"
+        # )
     return texts
 
 
@@ -411,7 +411,7 @@ def predict(test: pd.DataFrame,
             pipe = pipeline(task="text-generation",
                             model=model,
                             tokenizer=tokenizer,
-                            max_new_tokens=5,
+                            max_new_tokens=10,
                             temperature=0.1)
         else:
             pipe = pipeline(task="text-generation",
@@ -753,7 +753,7 @@ def inference(base_model_name: str,
         'interview_question',
         'interview_answer',
         label_name
-    ]] # [:20]
+    ]] #[:20]
 
     test_texts = create_inference_prompted_text(test_df, label_name)
     dataset = pd.DataFrame(test_texts, columns=['text'])
