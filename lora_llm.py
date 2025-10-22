@@ -22,6 +22,7 @@ from sklearn.metrics import (accuracy_score,
                              confusion_matrix)
 from typing import List
 import wandb
+from bedrock_api_class import BedrockAPICalls
 
 cache_dir = "/home/ec2-user/SageMaker"
 os.environ['HF_HOME'] = cache_dir
@@ -293,6 +294,9 @@ def create_test_prompted_text(dataset: pd.DataFrame,
             f"You will be given a part of an interview."
             f"Classify the response to the selected question"
             f"into one of the following categories: {classes_names}"
+            f"Output ONLY the label, nothing else.\n"
+            # f"\n### Example of correct output###\n"
+            # f"Label: claims ignorance\n"
             f". \n\n ### Part of the interview ### \nIntervier:"
             f" {row['interview_question']} \nResponse:"
             f" {row['interview_answer']} \n\n### Selected Question ###\n"
@@ -319,14 +323,29 @@ def create_test_prompted_text_name_summaries(dataset: pd.DataFrame,
     classes_names = ', '.join(list(dataset[label_name].unique()))
 
     for _, row in dataset.iterrows():
+        # texts.append(
+        #     f"You will be given a part of an interview."
+        #     f"Classify the response to the selected question"
+        #     f"into one of the following categories: {classes_names}"
+        #     f"Output ONLY the label, nothing else.\n"
+        #     f". \n\n ### Part of the interview ### \nIntervier:"
+        #     f" {row['interview_question']} \nResponse:"
+        #     f" {row['interview_answer']} \n\n### Selected Question: ###\n"
+        #     f" {row['names_information']} \n\n### Information about mentioned people: ###\n"
+        #     f"{row['question']} \n\nLabel:"
+        # )
         texts.append(
             f"You will be given a part of an interview."
             f"Classify the response to the selected question"
             f"into one of the following categories: {classes_names}"
+            f"Output ONLY the label, nothing else.\n"
             f". \n\n ### Part of the interview ### \nIntervier:"
             f" {row['interview_question']} \nResponse:"
             f" {row['interview_answer']} \n\n### Selected Question: ###\n"
-            f" {row['names_information']} \n\n### Information about mentioned people: ###\n"
+            f" {row['names_information']} \n\n### Content about mentioned people: ###\n"
+            f"Classify the response to the selected question (not the context)"
+            f"into one of the following categories: {classes_names}"
+            f"Output ONLY the label, nothing else.\n"
             f"{row['question']} \n\nLabel:"
         )
     return texts
@@ -428,10 +447,52 @@ def predict(test: pd.DataFrame,
     return y_pred
 
 
+def bedrock_predict(test: pd.DataFrame,
+            categories: list,
+            modelID: str) -> list:
+    """
+    Generates predictions for the test dataset using the provided model
+    from bedrock.
+
+    Args:
+        test (pd.DataFrame): The test dataset containing prompts.
+        categories (list): The list of possible categories for classification.
+        model (str): The model ID for bedrock API.
+
+    Returns:
+        list: A list of predicted labels for the test dataset.
+    """
+
+    category_set = set(category.lower() for category in categories)
+    y_pred = []
+    bedrock_api_llm = BedrockAPICalls(model_id=modelID)
+
+    for i in tqdm(range(0, len(test))):
+        prompt = test.iloc[i]["text"]
+        result = bedrock_api_llm.call_llm(prompt)
+
+        
+        answer = result.split("Label:")[-1].strip()
+        matched = False
+
+        for category in category_set:
+            if category in answer.lower():
+                print(f"Right label: {answer.lower()}")
+                y_pred.append(category)
+                matched = True
+                break
+
+        if not matched:
+            print(f"Wrong label: {answer.lower()}")
+            y_pred.append("none")
+
+    return y_pred
+
+
 def evaluation_report(y_true: pd.Series,
                       y_pred: pd.Series,
                       labels: list,
-                      run=None) -> None:
+                      run=None) -> list:
     """
     Generates and prints an evaluation report including accuracy and 
     classification metrics.
@@ -441,8 +502,12 @@ def evaluation_report(y_true: pd.Series,
         y_pred (np.ndarray): The predicted labels for the test dataset.
         labels (list): The list of label names.
         run: Optional; a wandb run object for logging metrics.
+
+    Returns:
+        list: A list containing evaluation metrics.
     """
     mapping = {label: idx for idx, label in enumerate(labels)}
+    results = []
 
     def map_func(x):
         return mapping.get(x, -1)  # Map to -1 if not found
@@ -458,6 +523,7 @@ def evaluation_report(y_true: pd.Series,
     print(f'Accuracy: {accuracy:.2f}')
     if run:
         wandb_log_dict["Accuracy"] = accuracy
+    results.append(f'Accuracy: {accuracy:.2f}')
 
     # Generate accuracy report
     unique_labels = set(y_true_mapped)  # Get unique labels
@@ -471,6 +537,7 @@ def evaluation_report(y_true: pd.Series,
         print(f'Accuracy for label {labels[label]}: {label_accuracy:.2f}')
         if run:
             wandb_log_dict[f"Accuracy for label {labels[label]}"] = label_accuracy
+        results.append(f'Accuracy for label {labels[label]}: {label_accuracy:.2f}')
 
     unsplit_labels = [label.replace(" ", "_") for label in labels]
 
@@ -481,6 +548,7 @@ def evaluation_report(y_true: pd.Series,
                                          labels=list(range(len(labels))))
     print('\nClassification Report:')
     print(class_report)
+    results.append('Classification Report:' + str(class_report))
 
     report_columns = ["Class", "Precision", "Recall", "F1-score", "Support"]
     report_table = []
@@ -504,7 +572,7 @@ def evaluation_report(y_true: pd.Series,
                                    labels=list(range(len(labels))))
     print('\nConfusion Matrix:')
     print(conf_matrix)
-
+    
     if run:
         wandb_log_dict["Confusion Matix"] = wandb.plot.confusion_matrix(
             y_true=y_true_mapped2,
@@ -512,6 +580,8 @@ def evaluation_report(y_true: pd.Series,
             class_names=labels
         )
         run.log(wandb_log_dict)
+    results.append('Confusion Matrix:' + str(conf_matrix))
+    return results
 
 def create_labels_train_set(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -551,7 +621,7 @@ def evaluate(base_model_name: str,
              added_name_summary: bool = False,
              model: nn.Module = None,
              tokenizer: PreTrainedTokenizer = None,
-             run=None) -> None:
+             run=None) -> list:
     """
     Evaluates the fine-tuned model on the test dataset and
     generates an evaluation report.
@@ -629,14 +699,14 @@ def evaluate(base_model_name: str,
     y_pred = pd.DataFrame({"label": y_pred})
     y_pred_evasion_based = create_labels_train_set(y_pred)[test_label_name]
     y_true = test_df[test_label_name].str.lower()
-    evaluation_report(y_true, y_pred_evasion_based, test_labels, run)
+    return evaluation_report(y_true, y_pred_evasion_based, test_labels, run)
 
 def inference(base_model_name: str,
               fine_tuned_model_path: str,
               label_name: str,
               model: nn.Module = None,
               tokenizer: PreTrainedTokenizer = None,
-              ) -> None:
+              ) -> list:
     """
     Inference a model on the test dataset and
     generates an evaluation report.
@@ -693,4 +763,60 @@ def inference(base_model_name: str,
     y_pred = predict(dataset, labels, model, tokenizer)
     y_pred = pd.Series(y_pred, name=label_name)
     y_true = test_df[label_name].str.lower()
-    evaluation_report(y_true, y_pred, labels)
+    return evaluation_report(y_true, y_pred, labels)
+
+
+def inference_Bedrock(modelID: str,
+             train_label_name: str,
+             test_label_name: str,
+             test_set_path: str = 'preprocessed_data/test_set.csv',
+             added_name_summary: bool = False,
+             run=None) -> list:
+    """
+    Evaluates the fine-tuned model on the test dataset and
+    generates an evaluation report.
+
+    Args:
+        modelID (str): The model ID for bedrock API.
+        train_label_name (str): The name of the label column for classification
+        in train set.
+        test_label_name (str): The name of the label column for classification
+        in test set.
+        test_set_path (str): The path to the test dataset.
+        added_name_summary (bool): Whether to include name summaries in the prompts.
+        run: Optional; a wandb run object for logging metrics.
+    """
+    
+    list_of_columns = [
+        'question',
+        'interview_question',
+        'interview_answer',
+        test_label_name,
+        train_label_name
+    ]
+
+    if added_name_summary:
+        list_of_columns.extend(['names_information'])
+
+    # Get test set data
+    test_df = pd.read_csv(test_set_path)[list_of_columns]
+    
+    # creating bool series False for NaN values
+    test_df = test_df[test_df["evasion_label"].notnull()]
+
+    if added_name_summary:
+        test_texts = create_test_prompted_text_name_summaries(test_df, train_label_name)     
+    else: 
+        test_texts = create_test_prompted_text(test_df, train_label_name)
+
+    dataset = pd.DataFrame(test_texts, columns=['text'])
+
+    # NEW
+    labels = [label.lower() for label in list(test_df[train_label_name].unique())]
+    test_labels = [label.lower() for label in list(test_df[test_label_name].unique())]
+
+    y_pred = bedrock_predict(dataset, labels, modelID)
+    y_pred = pd.DataFrame({"label": y_pred})
+    y_pred_evasion_based = create_labels_train_set(y_pred)[test_label_name]
+    y_true = test_df[test_label_name].str.lower()
+    return evaluation_report(y_true, y_pred_evasion_based, test_labels, run)
