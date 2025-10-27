@@ -7,7 +7,7 @@ import random
 from botocore.exceptions import ClientError
 
 class BedrockAPICalls:
-    def __init__(self, secrets_path='secrets.json', region='us-east-1',
+    def __init__(self, secrets_path='secrets.json', region='us-west-2',
                  model_id='anthropic.claude-3-sonnet-20240229-v1:0'):
         # Load secrets (optional if using IAM roles)
         with open(secrets_path, 'r') as file:
@@ -44,23 +44,28 @@ class BedrockAPICalls:
                     modelId=self.model_id,
                     body=json.dumps({
                         # Anthropic
-                        "anthropic_version": "bedrock-2023-05-31",
-                        "messages": [{"role": "user", 
-                                      "content": prompt}],
-                        "max_tokens": 10,
-                        "temperature": 0.1
+                        # "anthropic_version": "bedrock-2023-05-31",
+                        # "messages": [{"role": "user", 
+                        #               "content": prompt}],
+                        # "max_tokens": 10,
+                        # "temperature": 0.1
 
                         # Llama 3.1
                         # "prompt": prompt,
                         # "max_gen_len": 5,
                         # "temperature": 0.1
+
+                        # Mistral
+                        "prompt": prompt,
+                        "max_tokens": 10,
+                        "temperature": 0.1
                     }),
                     contentType="application/json",
                     accept="application/json"
                 )
                 self._last_call_time = time.time()
                 result = json.loads(response["body"].read())
-                return result['content'][0]['text']  # ['generation']
+                return result['choices'][0]['message']['content'] #['content'][0]['text']  # ['generation']
             except ClientError as e:
                 if e.response['Error']['Code'] in ("ThrottlingException", "TooManyRequestsException"):
                     wait_time = random.uniform(5, 15)
