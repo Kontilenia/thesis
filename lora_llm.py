@@ -129,7 +129,7 @@ def load_qevasion_dataset(tokenizer: PreTrainedTokenizer,
     # print("Example of train test:" + train_texts[1])
     # print("Example of validation test:" + validation_texts[1])
 
-    train_texts = train_texts #[:20]
+    train_texts = train_texts # [:20]
     validation_texts = validation_texts #[:2]
     return (CustomTextDataset(train_texts, tokenizer),
             CustomTextDataset(validation_texts, tokenizer))
@@ -323,17 +323,6 @@ def create_test_prompted_text_name_summaries(dataset: pd.DataFrame,
     classes_names = ', '.join(list(dataset[label_name].unique()))
 
     for _, row in dataset.iterrows():
-        # texts.append(
-        #     f"You will be given a part of an interview."
-        #     f"Classify the response to the selected question"
-        #     f"into one of the following categories: {classes_names}"
-        #     f"Output ONLY the label, nothing else.\n"
-        #     f". \n\n ### Part of the interview ### \nIntervier:"
-        #     f" {row['interview_question']} \nResponse:"
-        #     f" {row['interview_answer']} \n\n### Selected Question: ###\n"
-        #     f" {row['names_information']} \n\n### Information about mentioned people: ###\n"
-        #     f"{row['question']} \n\nLabel:"
-        # )
         texts.append(
             f"You will be given a part of an interview."
             f"Classify the response to the selected question"
@@ -342,12 +331,23 @@ def create_test_prompted_text_name_summaries(dataset: pd.DataFrame,
             f". \n\n ### Part of the interview ### \nIntervier:"
             f" {row['interview_question']} \nResponse:"
             f" {row['interview_answer']} \n\n### Selected Question: ###\n"
-            f" {row['names_information']} \n\n### Content about mentioned people: ###\n"
-            f"Classify the response to the selected question (not the context)"
-            f"into one of the following categories: {classes_names}"
-            f"Output ONLY the label, nothing else.\n"
+            f" {row['names_information']} \n\n### Information about mentioned people: ###\n"
             f"{row['question']} \n\nLabel:"
         )
+        # texts.append(
+        #     f"You will be given a part of an interview."
+        #     f"Classify the response to the selected question"
+        #     f"into one of the following categories: {classes_names}"
+        #     f"Output ONLY the label, nothing else.\n"
+        #     f". \n\n ### Part of the interview ### \nIntervier:"
+        #     f" {row['interview_question']} \nResponse:"
+        #     f" {row['interview_answer']} \n\n### Selected Question: ###\n"
+        #     f" {row['names_information']} \n\n### Content about mentioned people: ###\n"
+        #     f"Classify the response to the selected question (not the context)"
+        #     f"into one of the following categories: {classes_names}"
+        #     f"Output ONLY the label, nothing else.\n"
+        #     f"{row['question']} \n\nLabel:"
+        # )
     return texts
 
 
@@ -399,50 +399,62 @@ def predict(test: pd.DataFrame,
     Returns:
         list: A list of predicted labels for the test dataset.
     """
-    batch_size = 8
+    batch_size = 2
     category_set = set(category.lower() for category in categories)
     model.eval()  # Set the model to evaluation mode
-    model.config.use_cache = False
+    model.config.use_cache = True  
 
-    with torch.no_grad(), torch.autocast("cuda"):
-        y_pred = []
+    # with torch.no_grad(), torch.autocast("cuda"):
+    y_pred = []
 
-        if after_training:
-            pipe = pipeline(task="text-generation",
-                            model=model,
-                            tokenizer=tokenizer,
-                            max_new_tokens=5,
-                            temperature=0.1)
-        else:
-            pipe = pipeline(task="text-generation",
-                            model=model,
-                            tokenizer=tokenizer,
-                            temperature=0.1)
+    # if after_training:
+    #     pipe = pipeline(task="text-generation",
+    #                     model=model,
+    #                     tokenizer=tokenizer,
+    #                     max_new_tokens=10,
+    #                     temperature=0.1)
+    # else:
+    #     pipe = pipeline(task="text-generation",
+    #                     model=model,
+    #                     tokenizer=tokenizer,
+    #                     temperature=0.1)
 
-        terminators = [
-            pipe.tokenizer.eos_token_id,
-            pipe.tokenizer.convert_tokens_to_ids("<|eot_id|>")
-        ]
+    # terminators = [
+    #     pipe.tokenizer.eos_token_id,
+    #     pipe.tokenizer.convert_tokens_to_ids("<|eot_id|>")
+    # ]
 
-        for i in tqdm(range(0, len(test), batch_size)):
-            prompts = test.iloc[i:i + batch_size]["text"].tolist()
-            results = pipe(prompts,
-                           eos_token_id=terminators)
+    for i in tqdm(range(0, len(test), batch_size)):
+        prompts = test.iloc[i:i + batch_size]["text"].tolist()
+        # results = pipe(prompts,
+        #                 eos_token_id=terminators)
+        inputs = tokenizer(prompts, return_tensors="pt", padding=True).to(model.device)
 
-            for result in results:
-                answer = result[0]['generated_text'].split("Label:")[-1].strip()
-                matched = False
+        with torch.no_grad():
+            outputs = model.generate(
+                **inputs,
+                max_new_tokens=20 if after_training else 50,
+                temperature=0.1,
+                eos_token_id=tokenizer.eos_token_id,
+                do_sample=False
+            )
+        results = tokenizer.batch_decode(outputs, skip_special_tokens=True)
 
-                for category in category_set:
-                    if category in answer.lower():
-                        print(f"Right label: {answer.lower()}")
-                        y_pred.append(category)
-                        matched = True
-                        break
+        for result in results:
+            print(result)
+            answer = result.split("Label:")[-1].strip() #result[0]['generated_text'].split("Label:")[-1].strip()
+            matched = False
 
-                if not matched:
-                    print(f"Wrong label: {answer.lower()}")
-                    y_pred.append("none")
+            for category in category_set:
+                if category in answer.lower():
+                    print(f"Right label: {answer.lower()}")
+                    y_pred.append(category)
+                    matched = True
+                    break
+
+            if not matched:
+                print(f"Wrong label: {answer.lower()}")
+                y_pred.append("none")
 
     return y_pred
 
@@ -646,13 +658,14 @@ def evaluate(base_model_name: str,
             low_cpu_mem_usage=True,
             quantization_config=BitsAndBytesConfig(
                 load_in_4bit=True,
-                bnb_4bit_compute_dtype=torch.bfloat16
+                bnb_4bit_compute_dtype=torch.float16
             ),
             # dtype=torch.float16,
-            device_map="auto",
+            device_map="balanced",
             trust_remote_code=True,
             offload_folder="offload/",
-            cache_dir=cache_dir
+            cache_dir=cache_dir,
+            attn_implementation="eager" 
         )
         
     if not tokenizer:
@@ -660,11 +673,13 @@ def evaluate(base_model_name: str,
             # Mistral/Ministral or other models        
             tokenizer = AutoTokenizer.from_pretrained(base_model_name,
                                                      cache_dir=cache_dir,
-                                                     legacy=False) 
+                                                     legacy=False,
+                                                     use_fast=True) 
         else:
             # LLaMA models
             tokenizer = AutoTokenizer.from_pretrained(base_model_name,
-                                                  cache_dir=cache_dir)   
+                                                  cache_dir=cache_dir,
+                                                  use_fast=True)   
         tokenizer.pad_token = tokenizer.eos_token
 
     list_of_columns = [
@@ -753,7 +768,7 @@ def inference(base_model_name: str,
         'interview_question',
         'interview_answer',
         label_name
-    ]] # [:20]
+    ]] #[:20]
 
     test_texts = create_inference_prompted_text(test_df, label_name)
     dataset = pd.DataFrame(test_texts, columns=['text'])
